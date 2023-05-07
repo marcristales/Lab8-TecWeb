@@ -1,0 +1,20 @@
+.wall {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+}
+
+.wall--cave {
+    background-image: url('./../../assets/images/wall_cave.png');
+}
+
+.wall--kitchen {
+    background-image: url('./../../assets/images/stone_wall.jpg');
+}
+
+.wall--castle {
+    background-image: url('./../../assets/images/kitchen_wall.jpg');
+}
