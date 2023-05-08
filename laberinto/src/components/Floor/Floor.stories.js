@@ -1,4 +1,4 @@
-import { Floor } from './Floor';
+import Floor from './Floor';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 export default {

@@ -12,9 +12,9 @@
 }
 
 .wall--kitchen {
-    background-image: url('./../../assets/images/stone_wall.jpg');
+    background-image: url('./../../assets/images/kitchen_wall.jpg');
 }
 
 .wall--castle {
-    background-image: url('./../../assets/images/kitchen_wall.jpg');
+    background-image: url('./../../assets/images/stone_wall.jpg');
 }
