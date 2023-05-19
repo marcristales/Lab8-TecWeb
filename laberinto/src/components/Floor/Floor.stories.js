@@ -23,3 +23,8 @@ export const Castle = {
         type: 'castle',
     },
 }
+export const Goal = {
+    args: {
+        type: 'goal',
+    },
+}
