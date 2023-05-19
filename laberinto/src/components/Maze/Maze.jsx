@@ -31,34 +31,34 @@ const Maze = () => {
                   <div key={`${rowIndex}-${cellIndex}`}>
                     <Wall type="kitchen" />
                   </div>
-                );
+                )
               } else if (cell === 'p') {
                 return (
                   <div key={`${rowIndex}-${cellIndex}`}>
-                    <Player skin="mouse" />
+                  <Floor type="kitchen" />
                   </div>
-                );
+                )
               } else if (cell === ' ') {
                 return (
                   <div key={`${rowIndex}-${cellIndex}`}>
                     <Floor type="kitchen" />
                   </div>
-                );
+                )
               } else if (cell === 'g') {
                 return (
                   <div key={`${rowIndex}-${cellIndex}`}>
                     <Floor type="goal" />
                   </div>
-                );
+                )
               } else {
-                return null; // Add handling for other cell values if necessary
+                return null
               }
             })}
           </div>
         ))}
       </div>
     </div>
-  );
+  )
   // return (
   //   <div className={styles.Maze}>
   //     {mazeData.map((row, i) => {
