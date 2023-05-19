@@ -1,0 +1,17 @@
+.player {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+}
+
+.player--astronaut {
+    background-image: url('./../../assets/images/player_cave.png');
+}
+
+.player--mouse {
+    background-image: url('./../../assets/images/player_mouse.png');
+}
+
+.player--kid {
+    background-image: url('./../../assets/images/player_castle.png');
+}
