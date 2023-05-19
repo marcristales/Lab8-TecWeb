@@ -34,19 +34,19 @@ const Maze = () => {
                 )
               } else if (cell === 'p') {
                 return (
-                  <div key={`${rowIndex}-${cellIndex}`}>
+                  <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
                   <Floor type="kitchen" />
                   </div>
                 )
               } else if (cell === ' ') {
                 return (
-                  <div key={`${rowIndex}-${cellIndex}`}>
+                  <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
                     <Floor type="kitchen" />
                   </div>
                 )
               } else if (cell === 'g') {
                 return (
-                  <div key={`${rowIndex}-${cellIndex}`}>
+                  <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
                     <Floor type="goal" />
                   </div>
                 )
@@ -59,45 +59,7 @@ const Maze = () => {
       </div>
     </div>
   )
-  // return (
-  //   <div className={styles.Maze}>
-  //     {mazeData.map((row, i) => {
-  //       return (
-  //         <div key={i} className={styles.Maze__row}>
-  //           {row.map((cell, j) => {
-  //             if (cell === "+" || cell === "-" || cell === "|") {
-  //               return (
-  //                 <Wall
-  //                   key={j}
-  //                   type="kitchen"
-  //                 />
-  //               )
-  //             } else if (cell === " ") {
-  //               return (
-  //                 <Floor
-  //                   key={j}
-  //                   type="kitchen"
-  //                 />
-  //               )
-  //               // } else if (cell === "p") {
-  //               //   return (
-  //               //     <Character
-  //               //       key={j}
-  //               //       backgroundImage={prompt.character}
-  //               //     />
-  //               //   )
-  //             } else if (cell === "g") {
-  //               return <Floor key={j} type="kitchen" />
-  //             } else {
-  //               return null
-  //             }
-  //           })}
-  //         </div>
-  //       )
-  //     })}
-
-  //   </div>
-  // )
+  
 }
 
 export default Maze
