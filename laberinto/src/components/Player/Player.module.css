@@ -8,8 +8,21 @@
     background-image: url('./../../assets/images/player_cave.png');
 }
 
-.player--mouse {
-    background-image: url('./../../assets/images/player_mouse.png');
+.player--mouse--up {
+    background-image: url('./../../assets/images/player_mouse_up.png');
+}
+
+.player--mouse--down {
+    background-image: url('./../../assets/images/player_mouse_down.png');
+}
+
+.player--mouse--right {
+    background-image: url('./../../assets/images/player_mouse_side.png');
+}
+
+.player--mouse--left {
+    background-image: url('./../../assets/images/player_mouse_side.png');
+    transform: rotateY(180deg);
 }
 
 .player--kid {

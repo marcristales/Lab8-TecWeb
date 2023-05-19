@@ -1,13 +1,14 @@
 import React from 'react'
-import PropTypes from "prop-types";
-import styles from "./Player.module.css";
+import PropTypes from "prop-types"
+import styles from "./Player.module.css"
 
-const Player = ({ skin }) => {
-    return <div className={`${styles.player} ${styles[`player--${skin}`]}`} />
+const Player = ({ skin, direction }) => {
+    return <div className={`${styles.player} ${styles[`player--${skin}--${direction}`]}`} />
 }
 
 Player.propTypes = {
-    type: PropTypes.oneOf(['astronaut', 'mouse', 'kid'])
+    skin: PropTypes.oneOf(['astronaut', 'mouse', 'kid']),
+    direction: PropTypes.oneOf(['up', 'down', 'left', 'right'])
   }
 
 export default Player
