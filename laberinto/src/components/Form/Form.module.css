@@ -1,0 +1,32 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.label {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.labeltext {
+    margin-right: 10px;
+    width: 150px;
+}
+
+.input,
+.select {
+    padding: 5px;
+    width: 200px;
+}
+
+.button {
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #e6e6e6;
+}
