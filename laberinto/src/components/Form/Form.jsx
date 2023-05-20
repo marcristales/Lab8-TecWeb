@@ -36,11 +36,11 @@ const Form = ({ onClose, onSubmit }) => {
             <form onSubmit={handleSubmit}>
                 <div className={styles.label}>
                     <span className={styles.labeltext}>Ancho del Laberinto</span>
-                    <input className={styles.input} type="number" name="mazeWidth" min="4" max="100" onChange={handleChange} />
+                    <input className={styles.input} type="number" placeholder='5' name="mazeWidth" min="4" max="100" onChange={handleChange} />
                 </div>
                 <div className={styles.label}>
                     <span className={styles.labeltext}>Largo del Laberinto</span>
-                    <input className={styles.input} type="number" name="mazeHeight" min="4" max="100" onChange={handleChange} />
+                    <input className={styles.input} type="number" placeholder='5' name="mazeHeight" min="4" max="100" onChange={handleChange} />
                 </div>
                 <div className={styles.label}>
                     <span className={styles.labeltext}>Tema</span>
@@ -60,7 +60,7 @@ const Form = ({ onClose, onSubmit }) => {
                 </div>
                 <div className={styles.label}>
                     <span className={styles.labeltext}>Tiempo</span>
-                    <input className={styles.input} type="number" name="timer" id="timer" min="30" max="120" onChange={handleChange} />
+                    <input className={styles.input} type="number" placeholder='30' name="timer" min="30" max="120" onChange={handleChange} />
                 </div>
                 <button type="submit" className={styles.button}>Jugar</button>
             </form>
