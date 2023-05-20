@@ -65,6 +65,7 @@ const Maze = () => {
       skin,
       timer
     });
+    setFormSubmitted(true);
     setShowModal(false);
   };
 
@@ -105,40 +106,44 @@ const Maze = () => {
             </Modal>
           </div>
         )}
-        {mazeData.map((row, rowIndex) => (
-          <div key={rowIndex} className={styles.row}>
-            {row.map((cell, cellIndex) => {
-              if (cell === '+' || cell === '-' || cell === '|') {
-                return (
-                  <div key={`${rowIndex}-${cellIndex}`}>
-                    <Wall type={configValues.theme} />
-                  </div>
-                )
-              } else if (cell === 'p') {
-                return (
-                  <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
-                    <div className={styles.player}><Player skin="mouse" direction={playerDirection} /></div>
-                    <div className={styles.floor}><Floor type={configValues.theme} /></div>
-                  </div>
-                )
-              } else if (cell === ' ') {
-                return (
-                  <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
-                    <Floor type={configValues.theme} />
-                  </div>
-                )
-              } else if (cell === 'g') {
-                return (
-                  <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
-                    <Floor type="goal" />
-                  </div>
-                )
-              } else {
-                return null
-              }
-            })}
-          </div>
-        ))}
+        {formSubmitted && (
+          <>
+            {mazeData.map((row, rowIndex) => (
+              <div key={rowIndex} className={styles.row}>
+                {row.map((cell, cellIndex) => {
+                  if (cell === '+' || cell === '-' || cell === '|') {
+                    return (
+                      <div key={`${rowIndex}-${cellIndex}`}>
+                        <Wall type={configValues.theme} />
+                      </div>
+                    )
+                  } else if (cell === 'p') {
+                    return (
+                      <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
+                        <div className={styles.player}><Player skin="mouse" direction={playerDirection} /></div>
+                        <div className={styles.floor}><Floor type={configValues.theme} /></div>
+                      </div>
+                    )
+                  } else if (cell === ' ') {
+                    return (
+                      <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
+                        <Floor type={configValues.theme} />
+                      </div>
+                    )
+                  } else if (cell === 'g') {
+                    return (
+                      <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
+                        <Floor type="goal" />
+                      </div>
+                    )
+                  } else {
+                    return null
+                  }
+                })}
+              </div>
+            ))}
+          </>
+          )}
       </div>
     </div>
   )
