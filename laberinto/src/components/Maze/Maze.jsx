@@ -3,15 +3,24 @@ import styles from './Maze.module.css'
 import Floor from '../Floor/Floor'
 import Wall from '../Wall/Wall'
 import Player from '../Player/Player'
+import Modal from '../Modal/Modal'
+import Form from '../Form/Form'
 
 const Maze = () => {
   const [mazeData, setMazeData] = useState([])
   const [playerDirection, setPlayerDirection] = useState('down')
-
+  const [showModal, setShowModal] = useState(true)
+  const [configValues, setConfigValues] = useState({
+    mazeSize: { ancho: '5', largo: '5' },
+    theme: 'kitchen',
+    skin: 'mouse',
+    timer: 60
+  })
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const fetchMaze = async () => {
     const response = await fetch(
-      `https://maze.uvgenios.online/?type=json&w=5&h=5`
+      `https://maze.uvgenios.online/?type=json&w=${configValues.mazeSize.ancho}&h=${configValues.mazeSize.largo}`
     )
     const data = await response.json()
     setMazeData(data)
@@ -48,10 +57,20 @@ const Maze = () => {
     })
   }
 
+  const handleFormSubmit = (formValues) => {
+    const { mazeWidth, mazeHeight, theme, skin, timer } = formValues;
+    setConfigValues({
+      mazeSize: { ancho: mazeWidth, largo: mazeHeight },
+      theme,
+      skin,
+      timer
+    });
+    setShowModal(false);
+  };
 
   useEffect(() => {
-    fetchMaze()
-  }, [])
+    fetchMaze();
+  }, [configValues.mazeSize.ancho, configValues.mazeSize.largo]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -79,26 +98,33 @@ const Maze = () => {
   return (
     <div className={styles.container}>
       <div className={styles.maze}>
+        {showModal && !formSubmitted && (
+          <div className={styles.modal}>
+            <Modal>
+              <Form onSubmit={handleFormSubmit} />
+            </Modal>
+          </div>
+        )}
         {mazeData.map((row, rowIndex) => (
           <div key={rowIndex} className={styles.row}>
             {row.map((cell, cellIndex) => {
               if (cell === '+' || cell === '-' || cell === '|') {
                 return (
                   <div key={`${rowIndex}-${cellIndex}`}>
-                    <Wall type="kitchen" />
+                    <Wall type={configValues.theme} />
                   </div>
                 )
               } else if (cell === 'p') {
                 return (
                   <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
                     <div className={styles.player}><Player skin="mouse" direction={playerDirection} /></div>
-                    <div className={styles.floor}><Floor type="kitchen" /></div>
+                    <div className={styles.floor}><Floor type={configValues.theme} /></div>
                   </div>
                 )
               } else if (cell === ' ') {
                 return (
                   <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
-                    <Floor type="kitchen" />
+                    <Floor type={configValues.theme} />
                   </div>
                 )
               } else if (cell === 'g') {
