@@ -1,6 +1,6 @@
 .modalOverlay {
-    width: 50vw;
-    height: 50vh;
+    width: 30vw;
+    height: 40vh;
     background-color: rgba(102, 51, 153);
     display: flex;
     justify-content: center;
