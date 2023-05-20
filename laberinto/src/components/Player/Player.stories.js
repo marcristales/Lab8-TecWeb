@@ -9,15 +9,18 @@ export default {
 export const Astronaut = {
     args: {
         skin: 'astronaut',
+        direction: 'down'
     },
 }
 export const Mouse = {
     args: {
         skin: 'mouse',
+        direction: 'down'
     },
 }
 export const Kid = {
     args: {
         skin: 'kid',
+        direction: 'down'
     },
 }
