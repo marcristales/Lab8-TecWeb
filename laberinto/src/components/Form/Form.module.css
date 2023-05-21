@@ -30,3 +30,32 @@
 .button:hover {
     background-color: #e6e6e6;
 }
+
+.pillsContainer {
+    display: flex;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    background-color: #ffffff;
+    color: #000;
+    border-radius: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.pill input[type="radio"] {
+    display: none;
+}
+
+.pill input[type="radio"]:checked + label {
+    background-color: #55f1b6;
+    color: #fff;
+}
+
+.pill:hover {
+    background-color: #e6e6e6;
+}

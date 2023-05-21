@@ -12,23 +12,23 @@ const Form = ({ onClose, onSubmit }) => {
     })
 
     const handleChange = (e) => {
-      setFormValues((prevValues) => ({
-        ...prevValues,
-        [e.target.name]: e.target.value
-      }))
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            [e.target.name]: e.target.value
+        }))
     }
-  
+
     const handleSubmit = (e) => {
-      e.preventDefault()
-      onSubmit(formValues)
-      onClose()
-      setFormValues({
-        mazeWidth: '',
-        mazeHeight: '',
-        theme: 'kitchen',
-        skin: 'mouse',
-        timer: ''
-      })
+        e.preventDefault()
+        onSubmit(formValues)
+        onClose()
+        setFormValues({
+            mazeWidth: '',
+            mazeHeight: '',
+            theme: 'kitchen',
+            skin: 'mouse',
+            timer: ''
+        })
     }
 
     return (
@@ -44,11 +44,38 @@ const Form = ({ onClose, onSubmit }) => {
                 </div>
                 <div className={styles.label}>
                     <span className={styles.labeltext}>Tema</span>
-                    <select className={styles.select} name="theme" onChange={handleChange}>
-                        <option value="kitchen">Cocina</option>
-                        <option value="cave">Cueva</option>
-                        <option value="castle">Castillo</option>
-                    </select>
+                    <div className={styles.pillsContainer}>
+                        <label className={styles.pill}>
+                            <input
+                                type="radio"
+                                name="theme"
+                                value="kitchen"
+                                checked={formValues.theme === 'kitchen'}
+                                onChange={handleChange}
+                            />
+                            Cocina
+                        </label>
+                        <label className={styles.pill}>
+                            <input
+                                type="radio"
+                                name="theme"
+                                value="cave"
+                                checked={formValues.theme === 'cave'}
+                                onChange={handleChange}
+                            />
+                            Cueva
+                        </label>
+                        <label className={styles.pill}>
+                            <input
+                                type="radio"
+                                name="theme"
+                                value="castle"
+                                checked={formValues.theme === 'castle'}
+                                onChange={handleChange}
+                            />
+                            Castillo
+                        </label>
+                    </div>
                 </div>
                 <div className={styles.label}>
                     <span className={styles.labeltext}>Skin</span>
