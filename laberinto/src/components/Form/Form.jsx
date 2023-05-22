@@ -87,7 +87,7 @@ const Form = ({ onClose, onSubmit }) => {
                 </div>
                 <div className={styles.label}>
                     <span className={styles.labeltext}>Tiempo</span>
-                    <input className={styles.input} type="number" placeholder='30' name="timer" min="30" max="120" onChange={handleChange} />
+                    <input className={styles.input} type="number" placeholder='30' name="timer" min="30" max="300" onChange={handleChange} />
                 </div>
                 <button type="submit" className={styles.button}>Jugar</button>
             </form>
