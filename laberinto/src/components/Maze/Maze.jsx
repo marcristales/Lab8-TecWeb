@@ -17,8 +17,11 @@ const Maze = () => {
     skin: 'mouse',
     timer: 30
   })
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [won, setWon] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false)
+  const [useTimer, setUseTimer] = useState(false)
+  const [won, setWon] = useState(false)
+  const [remainingTime, setRemainingTime] = useState(0);
+  const [disableKeys, setDisableKeys] = useState(false)
 
   const fetchMaze = async () => {
     const response = await fetch(
@@ -52,7 +55,7 @@ const Maze = () => {
       } else if (newMaze[newY] && newMaze[newY][newX] === 'g') {
         newMaze[y][x] = ' '
         newMaze[newY][newX] = 'p'
-        setWon(true);
+        setWon(true)
       }
 
       return newMaze
@@ -60,43 +63,73 @@ const Maze = () => {
   }
 
   const handleFormSubmit = (formValues) => {
-    const { mazeWidth, mazeHeight, theme, skin, timer } = formValues;
+    const { mazeWidth, mazeHeight, theme, skin, timer } = formValues
     setConfigValues({
       mazeSize: { ancho: mazeWidth, largo: mazeHeight },
       theme,
       skin,
       timer
-    });
-    setFormSubmitted(true);
-    setShowModal(false);
-  };
+    })
+    setUseTimer(formValues.useTimer)
+    setRemainingTime(timer)
+    setFormSubmitted(true)
+    setShowModal(false)
+  }
 
   useEffect(() => {
-    fetchMaze();
-  }, [configValues.mazeSize.ancho, configValues.mazeSize.largo]);
+    fetchMaze()
+  }, [configValues.mazeSize.ancho, configValues.mazeSize.largo])
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'ArrowUp') {
-        movePlayer(0, -1)
-        setPlayerDirection('up')
-      } else if (event.key === 'ArrowDown') {
-        movePlayer(0, 1)
-        setPlayerDirection('down')
-      } else if (event.key === 'ArrowLeft') {
-        movePlayer(-1, 0)
-        setPlayerDirection('left')
-      } else if (event.key === 'ArrowRight') {
-        movePlayer(1, 0)
-        setPlayerDirection('right')
+    let intervalId
+
+    if (useTimer && remainingTime > 0) {
+      intervalId = setInterval(() => {
+        setRemainingTime((prevTime) => {
+          if (prevTime === 0) {
+            clearInterval(intervalId)
+            setDisableKeys(true)
+            return 0
+          } else if (won) {
+            clearInterval(intervalId)
+            setDisableKeys(true)
+            return prevTime
+          }
+          return prevTime - 1
+        })
+      }, 1000)
+      console.log("remaining ", remainingTime)
+    }
+
+    return () => {
+      clearInterval(intervalId)
+    }
+  }, [useTimer, remainingTime, won, setDisableKeys])
+
+  useEffect(() => {
+    if (!disableKeys) {
+      const handleKeyDown = (event) => {
+        if (event.key === 'ArrowUp') {
+          movePlayer(0, -1)
+          setPlayerDirection('up')
+        } else if (event.key === 'ArrowDown') {
+          movePlayer(0, 1)
+          setPlayerDirection('down')
+        } else if (event.key === 'ArrowLeft') {
+          movePlayer(-1, 0)
+          setPlayerDirection('left')
+        } else if (event.key === 'ArrowRight') {
+          movePlayer(1, 0)
+          setPlayerDirection('right')
+        }
+      }
+
+      window.addEventListener('keydown', handleKeyDown)
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown)
       }
     }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [])
+  }, [disableKeys])
 
   return (
     <div className={styles.container}>
@@ -116,9 +149,19 @@ const Maze = () => {
             </Modal>
           </div>
         )}
+        {formSubmitted && useTimer && remainingTime === 0 && (
+          <div className={styles.modal}>
+            <Modal>
+              <h1>¡Se acabó el tiempo!</h1>
+              <button className={styles.button} onClick={() => window.location.reload()}>Volver a jugar</button>
+            </Modal>
+          </div>
+        )}
         {formSubmitted && (
           <>
-            <Timer theme={configValues.theme} time={configValues.timer} won={won}/>
+            {useTimer && (
+              <Timer theme={configValues.theme} time={configValues.timer} won={won} />
+            )}
             {mazeData.map((row, rowIndex) => (
               <div key={rowIndex} className={styles.row}>
                 {row.map((cell, cellIndex) => {
