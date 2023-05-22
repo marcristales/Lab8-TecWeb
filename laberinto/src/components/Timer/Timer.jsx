@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import styles from "./Timer.module.css"
 
-const Timer = ({ theme, time }) => {
+const Timer = ({ theme, time, won }) => {
   const [timerValue, setTimerValue] = useState(time)
 
   useEffect(() => {
@@ -11,6 +11,9 @@ const Timer = ({ theme, time }) => {
         if (prevValue === 0) {
           clearInterval(interval)
           return 0
+        } else if (won) {
+          clearInterval(interval)
+          return prevValue
         }
         return prevValue - 1
       })
@@ -19,7 +22,7 @@ const Timer = ({ theme, time }) => {
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [won])
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60)
