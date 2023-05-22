@@ -39,7 +39,8 @@ const Timer = ({ theme, time, won }) => {
 
 Timer.propTypes = {
   theme: PropTypes.oneOf(["kitchen", "cave", "castle"]),
-  time: PropTypes.number.isRequired
+  time: PropTypes.number.isRequired,
+  won: PropTypes.bool.isRequired,
 }
 
 export default Timer
