@@ -8,13 +8,17 @@ const Form = ({ onClose, onSubmit }) => {
         mazeHeight: '5',
         theme: 'kitchen',
         skin: 'mouse',
-        timer: '30'
+        timer: '30',
+        useTimer: false
     })
 
     const handleChange = (e) => {
+        const { name, value, type, checked } = e.target
+        const newValue = type === 'checkbox' ? checked : value
+
         setFormValues((prevValues) => ({
             ...prevValues,
-            [e.target.name]: e.target.value
+            [name]: newValue
         }))
     }
 
@@ -27,7 +31,8 @@ const Form = ({ onClose, onSubmit }) => {
             mazeHeight: '',
             theme: 'kitchen',
             skin: 'mouse',
-            timer: ''
+            timer: '',
+            useTimer: false
         })
     }
 
@@ -87,7 +92,16 @@ const Form = ({ onClose, onSubmit }) => {
                 </div>
                 <div className={styles.label}>
                     <span className={styles.labeltext}>Tiempo</span>
-                    <input className={styles.input} type="number" placeholder='30' name="timer" min="30" max="300" onChange={handleChange} />
+                    <input className={styles.input} type="number" placeholder='30' name="timer" min="10" max="300" onChange={handleChange} />
+                </div>
+                <div className={styles.label}>
+                    <span className={styles.labeltext}>Usar temporizador</span>
+                    <input
+                        type="checkbox"
+                        name="useTimer"
+                        checked={formValues.useTimer}
+                        onChange={handleChange}
+                    />
                 </div>
                 <button type="submit" className={styles.button}>Jugar</button>
             </form>
