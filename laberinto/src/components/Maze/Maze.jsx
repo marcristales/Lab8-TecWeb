@@ -5,6 +5,7 @@ import Wall from '../Wall/Wall'
 import Player from '../Player/Player'
 import Modal from '../Modal/Modal'
 import Form from '../Form/Form'
+import Timer from '../Timer/Timer'
 
 const Maze = () => {
   const [mazeData, setMazeData] = useState([])
@@ -14,9 +15,10 @@ const Maze = () => {
     mazeSize: { ancho: '5', largo: '5' },
     theme: 'kitchen',
     skin: 'mouse',
-    timer: 60
+    timer: 30
   })
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [won, setWon] = useState(false);
 
   const fetchMaze = async () => {
     const response = await fetch(
@@ -50,7 +52,7 @@ const Maze = () => {
       } else if (newMaze[newY] && newMaze[newY][newX] === 'g') {
         newMaze[y][x] = ' '
         newMaze[newY][newX] = 'p'
-        alert('Ganaste!')
+        setWon(true);
       }
 
       return newMaze
@@ -106,8 +108,17 @@ const Maze = () => {
             </Modal>
           </div>
         )}
+        {formSubmitted && won && (
+          <div className={styles.modal}>
+            <Modal>
+              <h1>¡Ganaste!</h1>
+              <button className={styles.button} onClick={() => window.location.reload()}>Volver a jugar</button>
+            </Modal>
+          </div>
+        )}
         {formSubmitted && (
           <>
+            <Timer theme={configValues.theme} time={configValues.timer} won={won}/>
             {mazeData.map((row, rowIndex) => (
               <div key={rowIndex} className={styles.row}>
                 {row.map((cell, cellIndex) => {
@@ -120,7 +131,7 @@ const Maze = () => {
                   } else if (cell === 'p') {
                     return (
                       <div key={`${rowIndex}-${cellIndex}`} className={styles.cell}>
-                        <div className={styles.player}><Player skin="mouse" direction={playerDirection} /></div>
+                        <div className={styles.player}><Player skin={configValues.skin} direction={playerDirection} /></div>
                         <div className={styles.floor}><Floor type={configValues.theme} /></div>
                       </div>
                     )
@@ -143,7 +154,7 @@ const Maze = () => {
               </div>
             ))}
           </>
-          )}
+        )}
       </div>
     </div>
   )
