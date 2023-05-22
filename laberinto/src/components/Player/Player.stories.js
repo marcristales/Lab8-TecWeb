@@ -18,9 +18,9 @@ export const Mouse = {
         direction: 'down'
     },
 }
-export const Kid = {
+export const Knight = {
     args: {
-        skin: 'kid',
+        skin: 'knight',
         direction: 'down'
     },
 }

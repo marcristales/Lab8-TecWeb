@@ -1,11 +1,26 @@
 .player {
     width: 50px;
     height: 50px;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.player--astronaut {
-    background-image: url('./../../assets/images/player_cave.png');
+.player--astronaut--up {
+    background-image: url('./../../assets/images/player_astro_up.png');
+}
+
+.player--astronaut--down {
+    background-image: url('./../../assets/images/player_astro_down.png');
+}
+
+.player--astronaut--right {
+    background-image: url('./../../assets/images/player_astro_side.png');
+}
+
+.player--astronaut--left {
+    background-image: url('./../../assets/images/player_astro_side.png');
+    transform: rotateY(180deg);
 }
 
 .player--mouse--up {
@@ -25,6 +40,19 @@
     transform: rotateY(180deg);
 }
 
-.player--kid {
-    background-image: url('./../../assets/images/player_castle.png');
+.player--knight--up {
+    background-image: url('./../../assets/images/player_knight_up.png');
+}
+
+.player--knight--down {
+    background-image: url('./../../assets/images/player_knight_down.png');
+}
+
+.player--knight--right {
+    background-image: url('./../../assets/images/player_knight_side.png');
+}
+
+.player--knight--left {
+    background-image: url('./../../assets/images/player_knight_side.png');
+    transform: rotateY(180deg);
 }

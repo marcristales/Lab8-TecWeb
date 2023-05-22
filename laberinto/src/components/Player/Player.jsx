@@ -7,7 +7,7 @@ const Player = ({ skin, direction }) => {
 }
 
 Player.propTypes = {
-    skin: PropTypes.oneOf(['astronaut', 'mouse', 'kid']),
+    skin: PropTypes.oneOf(['astronaut', 'mouse', 'knight']),
     direction: PropTypes.oneOf(['up', 'down', 'left', 'right'])
   }
 
